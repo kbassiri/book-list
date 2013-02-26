@@ -259,3 +259,81 @@ vendor
   External libraries that the application depends on. Also includes the plugins
   subdirectory. If the app has frozen rails, those gems also go here, under
   vendor/rails/. This directory is in the load path.
+
+
+
+If you're looking to use Google Books to retrieve information about books, you can use their data API: http://code.google.com/apis/books/docs/gdata/developers_guide_protocol.html
+
+Making requests to a URL like http://books.google.com/books/feeds/volumes?q=isbn:9780974514055 will return XML with the book's information. You could use the Nokogiri gem to parse the result ( http://nokogiri.org/ ).
+
+One thing to be aware of is that, to get the full descriptions for books, you need to get the entry instead of just the feed results.
+
+require 'open-uri'
+require 'nokogiri'
+
+class Book
+  attr_accessor :title, :description
+  def self.from_google(title)
+    book  = self.new
+    entry = Nokogiri::XML(open "http://books.google.com/books/feeds/volumes?q=#{title}").css("entry id").first
+    xml   = Nokogiri::XML(open entry.text) if entry
+    return book unless xml
+
+    book.title       = xml.css("entry dc|title").first.text       unless xml.css("entry dc|title").empty?
+    book.description = xml.css("entry dc|description").first.text unless xml.css("entry dc|description").empty?
+    book
+  end
+end
+
+b = Book.from_google("Ruby")
+p 
+
+
+
+
+
+For Amazon:
+I am trying to use amazons product api to get a list of their new available books and I am having trouble 
+ I am currently using the ruby-aaws-0.8.1 gem that I found here.
+Right now I have set up code that gets me the newest book using a keyword and have set a date rank 
+but currently the api is giving me back the newest book, but is there a way to have it so that it can give 
+me the newest avaiThis is the first response I am getting back, but this book is currently not available.lable book?
+http://www.amazon.com/Artificial-Intelligence-Programming-techniques-Basic/dp/B000YC4KT6
+#!/usr/bin/ruby -w
+
+require 'amazon/aws/search'
+
+include Amazon::AWS
+include Amazon::AWS::Search
+
+is = ItemSearch.new( 'Books', { 'Keywords' => 'Programming',
+                              'Sort' => 'daterank',
+                              'Available' => 'Available' })
+
+is.response_group = ResponseGroup.new( 'Small' )
+
+req = Request.new()
+req.locale = 'us'
+resp = req.search( is, 1 )
+
+items = resp.item_search_response[0].items[0].item
+
+items.each { |item| puts item, '' }
+
+puts items.count
+
+Sorry, I don't have privilege to comment. Not sure this is the issue, but I think the ItemSearch parameter to get only
+ available products is "Availability" rather than "Available". You will also need to use this parameter in combination with a Merchant ID
+ and Condition as per the doc (http://docs.amazonwebservices.com/AWSECommerceService/2010-11-01/DG/ItemSearch.html). Could you please try changing:
+is = ItemSearch.new( 'Books', {'Keywords' => 'Programming',
+                              'Sort' => 'daterank',
+                              'Available' => 'Available' })
+with
+
+is = ItemSearch.new( 'Books', { 'Keywords' => 'Programming',
+                              'Sort' => 'daterank',
+                              'Availability' => 'Available',
+                              'MerchantId' => 'ATVPDKIKX0DER',
+                              'Condition' => 'All'})
+The MerchantId given above is Amazon's US MerchantId. You will need to change this MerchantId accordingly if you want to look
+ at Amazon's inventory in other countries, or if you want to look at third party's (read non-Amazon) inventory.
