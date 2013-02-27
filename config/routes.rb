@@ -1,7 +1,12 @@
 BookList::Application.routes.draw do
 
-  match '/test' => 'books#amazon'
+  devise_for :users
 
+  #devise_for :models
+
+  match '/test' => 'books#amazon'
+  #root_url defined recommended by devise
+  root :to => "home#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -14,14 +19,14 @@ BookList::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+     resources :books
 
   # Sample resource route with options:
-     resources :books do
-       member do
-         get 'short'
-         post 'toggle'
-       end
+  #   resources :books do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
   #
   #     collection do
   #       get 'sold'

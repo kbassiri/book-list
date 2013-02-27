@@ -21,6 +21,7 @@ group :assets do
   gem 'turbo-sprockets-rails3'
   gem 'bootstrap-sass', '~> 2.3.0.1'
 end
+gem 'devise'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
