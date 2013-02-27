@@ -1,4 +1,7 @@
 BookList::Application.routes.draw do
+
+  match '/test' => 'books#amazon'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -14,11 +17,11 @@ BookList::Application.routes.draw do
   #   resources :products
 
   # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
+     resources :books do
+       member do
+         get 'short'
+         post 'toggle'
+       end
   #
   #     collection do
   #       get 'sold'

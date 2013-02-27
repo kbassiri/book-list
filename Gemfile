@@ -19,14 +19,8 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
   gem 'turbo-sprockets-rails3'
+  gem 'bootstrap-sass', '~> 2.3.0.1'
 end
-#from here I copied from github.com/thomas-mcdonald/bootstrap-sass
-#gem 'sass-rails', '~> 3.2'
-gem 'bootstrap-sass', '~> 2.3.0.1'
-gem 'compass_twitter_bootstrap'
-gem 'compass-rails'
-
-
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
