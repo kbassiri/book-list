@@ -22,6 +22,7 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.3.0.1'
 end
 gem 'devise'
+gem "amazon-ecs", "~>2.2.4"
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

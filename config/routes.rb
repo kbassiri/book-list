@@ -1,7 +1,5 @@
 BookList::Application.routes.draw do
 
-  devise_for :users
-
   #devise_for :models
 
   match '/test' => 'books#amazon'
