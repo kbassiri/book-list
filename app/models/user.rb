@@ -12,12 +12,19 @@ class User < ActiveRecord::Base
   #
   #Above this line shoul stay **************************************************
   #
+  #Generic Product Advertising Ruby API using Nokogiri. Uses Response and Element wrapper classes for easy access to the REST API XML output.
+
+  # It is generic, so you can easily extend Amazon::Ecs to support other not implemented REST operations; and it is also generic because it just wraps around Nokogiri element object, instead of providing one-to-one object/attributes to XML elements map.
+
+  #The idea is as the API evolves, there is a change in REST XML output structure, no updates will be required on amazon-ecs gem, instead you just need to update the element path.
+
+  #For HPricot dependency implementation, please install 1.2.x version or checkout v1.2 branch.
   #
-# Set the default options; options will be camelized and converted to REST request parameters.
-# associate_tag and AWS_access_key_id are required options, associate_tag is required option
-# since API version 2011-08-01. 
-#
-# To sign your request, include AWS_secret_key. 
+  # Set the default options; options will be camelized and converted to REST request parameters.
+  # associate_tag and AWS_access_key_id are required options, associate_tag is required option
+  # since API version 2011-08-01. 
+  #
+  # To sign your request, include AWS_secret_key. 
 require 'amazon/ecs'
 
 Amazon::Ecs.options = {
