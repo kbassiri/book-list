@@ -1,6 +1,7 @@
 BookList::Application.routes.draw do
 
   #devise_for :models
+   devise_for :users
 
   match '/test' => 'books#amazon'
   #root_url defined recommended by devise
@@ -17,7 +18,7 @@ BookList::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-     resources :books
+  resources :books
 
   # Sample resource route with options:
   #   resources :books do
