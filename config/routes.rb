@@ -4,17 +4,21 @@ BookList::Application.routes.draw do
    devise_for :users
 
   match '/test' => 'books#amazon'
+  #root :to => "home#index"
   #root_url defined recommended by devise
-  root :to => "home#index"
+  root :to => "books#index"
+  # root :to => "devise#destroy"
+  #  root :to => "user#destroy"
+   #root  :to=> devise
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
+  # match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
@@ -63,3 +67,4 @@ BookList::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 end
+

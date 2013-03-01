@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= full_title(yield(:title)) %></title>
+    <title></title>
     <%= stylesheet_link_tag    "application", media: "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -16,21 +16,23 @@
           <%= link_to "sample app", '#', id: "logo" %>
           <nav>
             <ul class="nav pull-right">
-              <li><%= link_to "Home",    '#' %></li>
+              <li><%= link_to("Home", root_path) %></li>
               <li><%= link_to "Help",    '#' %></li>
-              <li><%= link_to "Sign in", '#' %></li>
+              <li><%= link_to("Logout",destroy_user_session_path, :method=>:delete)%></li>
+              <li><a href="<%=new_user_session_path%>">Sign-in</a></li>
             </ul>
           </nav>
         </div>
       </div>
-     <div>
-       <% flash.each do |key, value| %>
-           <%= content_tag(:div, value, :class => "flash #{key}") %>
-       <% end %>
-     </div>
     </header>
     <div class="container">
+      <div>
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, :class => "flash #{key}") %>
+        <% end %>
+      </div>
       <%= yield %>
     </div>
   </body>
 </html>
+
