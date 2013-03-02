@@ -7,7 +7,9 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
- *
+ *  require_self ,this application.css requires itself
+ *  require_tree ,by tree . means tree of stylesheet folders which have application.css, books.css.scss, and cutom.css.scss as branches, with heirarcy. 
  *= require_self
  *= require_tree .
  */
+
