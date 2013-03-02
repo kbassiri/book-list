@@ -18,8 +18,10 @@
             <ul class="nav pull-right">
               <li><%= link_to("Home", root_path) %></li>
               <li><%= link_to "Help",    '#' %></li>
-              <li><%= link_to("Logout",destroy_user_session_path, :method=>:delete)%></li>
-              <li><a href="<%=new_user_session_path%>">Sign-in</a></li>
+              <li><a href="<%= new_user_session_path %>">Sign-in</a></li>
+              <% if user_signed_in? %>
+                <li><%= link_to("Logout", destroy_user_session_path, :method => :delete) %></li>
+              <% end %>
             </ul>
           </nav>
         </div>
